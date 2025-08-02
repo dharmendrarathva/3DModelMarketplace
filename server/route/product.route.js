@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import auth from '../middleware/auth.js'
-import { createProductController,getProductController,getProductByCategory,getProductByCategoryAndSubCategory,getProductDetails,updateProductDetails,deleteProductDetails,searchProduct} from '../controllers/product.controller.js'
+import { createProductController,getProductController,getProductByCategory,getProductByCategoryAndSubCategory,getProductDetails,updateProductDetails,deleteProductDetails,searchProduct,getRandomProducts,getAvailableProducts,getLatestProducts,getSimilarProducts,getProductViews } from '../controllers/product.controller.js'
 import { admin } from '../middleware/Admin.js'
 
 const productRouter = Router()
@@ -19,6 +19,20 @@ productRouter.put('/update-product-details',auth,admin,updateProductDetails)
 
 
  productRouter.post('/search-product',searchProduct)
+
+ productRouter.get('/get-random-products', getRandomProducts)
+
+ productRouter.get('/get-available-products', getAvailableProducts);
+
+ productRouter.get('/get-latest-products', getLatestProducts);
+ 
+productRouter.post('/get-similar-products', getSimilarProducts);
+
+productRouter.get('/product/:productId/views', getProductViews);
+
+
+
+ 
 
 export default productRouter
 

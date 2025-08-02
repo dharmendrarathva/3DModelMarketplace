@@ -1,0 +1,122 @@
+.register {
+  min-height: 100vh;
+    background: linear-gradient(135deg, #111827, #171717);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.register__container {
+  width: 100%;
+  max-width: 28rem;
+  background: rgba(38, 38, 38, 0.9);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  transition: all 0.3s ease-in-out;
+ margin-bottom: 90px;
+}
+
+.register__title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-align: center;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.register__form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.register__label {
+  display: block;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.register__input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #525252;
+  background-color: #404040;
+  color: white;
+}
+
+.register__input::placeholder {
+  color: #a3a3a3;
+}
+
+.register__input:focus {
+  outline: none;
+  border-color: #a3a3a3;
+}
+
+.register__password-container {
+  position: relative;
+}
+
+.register__password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #000000;
+}
+
+.register__error {
+  font-size: 0.875rem;
+  color: #ef4444;
+  margin-top: 0.25rem;
+}
+
+.register__button {
+  width: 100%;
+  padding: 0.85rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  background: linear-gradient(to right, #000000, #000000);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: scale(1);
+  border: 1px solid #4b5563;
+}
+
+
+
+
+
+
+.register__footer {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #a3a3a3;
+  margin-top: 1.5rem;
+}
+
+.register__link {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.register__link:hover {
+  
+  color: #ffffff;
+  text-decoration: underline;
+}

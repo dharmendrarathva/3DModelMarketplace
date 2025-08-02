@@ -1,0 +1,134 @@
+/* pagescss/CheckoutPage.css */
+.checkout-page {
+    min-height: 100vh;
+    padding: 2.5rem 0;
+}
+
+.checkout-page-blank {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2.5rem;
+}
+
+.checkout-container {
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+}
+
+.checkout-card {
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.checkout-title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    color: rgb(31, 41, 55);
+    margin-bottom: 1.5rem;
+}
+
+.checkout-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom-width: 1px;
+    padding-bottom: 0.5rem;
+}
+
+.checkout-label {
+    color: rgb(75, 85, 99);
+}
+
+.checkout-value {
+    color: rgb(31, 41, 55);
+}
+
+.checkout-strike {
+    text-decoration-line: line-through;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: rgb(156, 163, 175);
+}
+
+.checkout-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+}
+
+.checkout-button {
+    width: 100%;
+    background-color: rgb(37, 99, 235);
+    color: white;
+    padding: 0.5rem 0;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 500;
+    transition-property: background-color;
+    transition-duration: 150ms;
+}
+
+.checkout-button:hover {
+    background-color: rgb(29, 78, 216);
+}
+
+.checkout-message {
+    margin-top: 1.5rem;
+    text-align: center;
+    color: rgb(22, 163, 74);
+}
+
+.coming-soon-card {
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2.5rem;
+    background-color: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+.coming-soon-title {
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 700;
+    color: rgb(22, 163, 74);
+    text-align: center;
+}
+
+.coming-soon-subtitle {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    margin-top: 1.5rem;
+    color: rgb(234, 179, 8);
+    text-align: center;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}

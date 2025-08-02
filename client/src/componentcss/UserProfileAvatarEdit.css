@@ -1,0 +1,105 @@
+/* componentcss/UserProfileAvatarEdit.css */
+
+.user-profile-avatar-edit-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Darker overlay for black theme */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 1000;
+}
+
+.user-profile-avatar-edit-container {
+    background-color: #1f1f1f; /* Dark container */
+    max-width: 24rem;
+    width: 100%;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    color: #f0f0f0; /* Light text for contrast */
+}
+
+.user-profile-avatar-edit-close-btn {
+    color: #bbb;
+    width: fit-content;
+    display: block;
+    margin-left: auto;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.user-profile-avatar-edit-close-btn:hover {
+    color: #fff;
+}
+
+.user-profile-avatar-preview {
+    width: 6rem;
+    height: 6rem;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+    margin-bottom: 1rem;
+}
+
+.user-profile-avatar-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-profile-upload-label {
+    border: 1px solid #c6bdb4; /* Yellow border */
+    background-color: transparent;
+    color: #dddcd8;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    margin: 1rem 0;
+}
+
+.user-profile-upload-label:hover {
+    background-color: #ffffff;
+    color: #1f1f1f;
+}
+
+.user-profile-upload-input {
+    display: none;
+}
+
+.user-profile-submit-btn {
+    background-color: #22c55e;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+    transition: background-color 0.3s ease;
+}
+
+.user-profile-submit-btn:hover {
+    background-color: #15803d;
+}
+
+.user-profile-success-message {
+    color: #4ade80;
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+    text-align: center;
+}

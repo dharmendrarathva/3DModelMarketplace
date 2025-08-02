@@ -5,42 +5,76 @@ import toast from 'react-hot-toast';
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
+import '../pagescss/Register.css';
+import { motion } from 'framer-motion';
 
 const Register = () => {
   const [data, setData] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
+  const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    setData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
-  const valideValue = Object.values(data).every((el) => el);
+  const validateFields = () => {
+    const newErrors = {};
+
+    if (!data.name.trim()) newErrors.name = 'Name is required.';
+
+    if (!data.email.trim()) {
+      newErrors.email = 'Email is required.';
+    } else {
+      const emailRegex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+      if (!emailRegex.test(data.email)) {
+        newErrors.email = 'Invalid email format.';
+      } else {
+        const [username, domain] = data.email.split('@');
+        if (domain !== 'gmail.com') {
+          newErrors.email = 'Only Gmail addresses are allowed.';
+        }
+        if (!/^[a-z0-9]+$/.test(username)) {
+          newErrors.email = 'Username must be lowercase letters and numbers only.';
+        }
+        const numbers = username.match(/\d/g);
+        if (!numbers || numbers.length < 3) {
+          newErrors.email = 'Username must include at least 3 numbers.';
+        }
+      }
+    }
+
+    if (!data.password) {
+      newErrors.password = 'Password is required.';
+    } else if (data.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters.';
+    }
+
+    if (!data.confirmPassword) {
+      newErrors.confirmPassword = 'Confirm Password is required.';
+    } else if (data.password !== data.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (data.password !== data.confirmPassword) {
-      toast.error('Password and Confirm Password must be the same');
-      return;
-    }
+    if (!validateFields()) return;
 
     try {
-      const response = await Axios({
-        ...SummaryApi.register,
-        data: data
-      });
+      const response = await Axios({ ...SummaryApi.register, data });
 
       if (response.data.error) {
         toast.error(response.data.message);
@@ -49,12 +83,7 @@ const Register = () => {
 
       if (response.data.success) {
         toast.success(response.data.message);
-        setData({
-          name: '',
-          email: '',
-          password: '',
-          confirmPassword: ''
-        });
+        setData({ name: '', email: '', password: '', confirmPassword: '' });
         navigate('/login');
       }
     } catch (error) {
@@ -63,103 +92,108 @@ const Register = () => {
   };
 
   return (
-    <section className="w-full container mx-auto px-2">
-      <div className="bg-white shadow-xl rounded-lg p-8 mx-auto w-full max-w-md mt-10 text-center">
-        <h2 className="text-2xl font-bold text-gray-700 mb-6">Create an Account</h2>
+    <div className="register">
+      <div className="register__container">
+      <motion.h2
+  className="register__title"
+  initial={{ y: 20, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  transition={{ delay: 0.1, duration: 0.5 }}
+>
+  Create an Account
+</motion.h2>
 
-        <form className="grid gap-6 text-left" onSubmit={handleSubmit}>
-          <div className="grid gap-1">
-            <label htmlFor="name" className="font-semibold">Name:</label>
+
+        <form className="register__form" onSubmit={handleSubmit}>
+          {/* Name */}
+          <div className="register__form-group">
+            <label className="register__label">Name</label>
             <input
               type="text"
-              id="name"
               name="name"
-              className="bg-blue-50 p-3 border rounded-lg outline-none focus:border-green-400"
               value={data.name}
               onChange={handleChange}
               placeholder="Enter your name"
-              autoFocus
+              className="register__input"
             />
+            {errors.name && <p className="register__error">{errors.name}</p>}
           </div>
 
-          <div className="grid gap-1">
-            <label htmlFor="email" className="font-semibold">Email:</label>
+          {/* Email */}
+          <div className="register__form-group">
+            <label className="register__label">Email</label>
             <input
               type="email"
-              id="email"
               name="email"
-              className="bg-blue-50 p-3 border rounded-lg outline-none focus:border-green-400"
               value={data.email}
               onChange={handleChange}
               placeholder="Enter your email"
+              className="register__input"
             />
+            {errors.email && <p className="register__error">{errors.email}</p>}
           </div>
 
-          <div className="grid gap-1">
-            <label htmlFor="password" className="font-semibold">Password:</label>
-            <div className="relative">
+          {/* Password */}
+          <div className="register__form-group">
+            <label className="register__label">Password</label>
+            <div className="register__password-container">
               <input
                 type={showPassword ? 'text' : 'password'}
-                id="password"
                 name="password"
-                className="bg-blue-50 p-3 pr-10 border rounded-lg outline-none focus:border-green-400 w-full"
                 value={data.password}
                 onChange={handleChange}
-                placeholder="Enter your password"
+                placeholder="Enter password"
+                className="register__input"
               />
               <div
                 onClick={() => setShowPassword((prev) => !prev)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                className="register__password-toggle"
               >
-                {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                {showPassword ? <FaRegEyeSlash size={18} /> : <FaRegEye size={18} />}
               </div>
             </div>
+            {errors.password && <p className="register__error">{errors.password}</p>}
           </div>
 
-          <div className="grid gap-1">
-            <label htmlFor="confirmPassword" className="font-semibold">Confirm Password:</label>
-            <div className="relative">
+          {/* Confirm Password */}
+          <div className="register__form-group">
+            <label className="register__label">Confirm Password</label>
+            <div className="register__password-container">
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
-                id="confirmPassword"
                 name="confirmPassword"
-                className="bg-blue-50 p-3 pr-10 border rounded-lg outline-none focus:border-green-400 w-full"
                 value={data.confirmPassword}
                 onChange={handleChange}
-                placeholder="Enter confirm password"
+                placeholder="Confirm password"
+                className="register__input"
               />
               <div
                 onClick={() => setShowConfirmPassword((prev) => !prev)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                className="register__password-toggle"
               >
-                {showConfirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                {showConfirmPassword ? <FaRegEyeSlash size={18} /> : <FaRegEye size={18} />}
               </div>
             </div>
+            {errors.confirmPassword && (
+              <p className="register__error">{errors.confirmPassword}</p>
+            )}
           </div>
 
-          <button
-  type="submit"
-  className={`flex items-center justify-center ${
-    valideValue ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-500"
-  } text-white px-4 py-2 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-900`}
-  disabled={!valideValue}
->
-  <span className="font-semibold text-sm">Register</span>
+          {/* Submit Button */}
+         <button type="submit" className="register__button register__button--active">
+  Register
 </button>
 
         </form>
 
-        <p className="text-center mt-4">
+        <p className="register__footer">
           Already have an account?{' '}
-          <Link
-            to="/login"
-            className="font-semibold text-green-700 hover:text-green-800"
-          >
+          <Link to="/login" className="register__link">
             Login
           </Link>
         </p>
       </div>
-    </section>
+    </div>
   );
 };
 

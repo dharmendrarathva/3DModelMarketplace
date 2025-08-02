@@ -1,0 +1,77 @@
+/* AvailableProductsDisplay.css */
+.products-display {
+  width: 100%;
+  margin-bottom: 4.5rem;
+    margin-top: 2.5rem;
+
+}
+
+.products-display__wrapper {
+  max-width: 1455px;
+  margin: 0;
+}
+
+/* Title Styles */
+.products-display__title {
+  margin-bottom: 1.25rem;
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #26a9e0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Grid Layout */
+.products-display__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  justify-content: center; /* Ensures cards stay centered */
+  gap: 1.5rem; /* Match spacing from top section */
+  padding: 0 1rem;
+}
+
+
+
+  .products-display__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+
+
+  .products-display__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+
+/* Load More Button */
+.products-display__load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+.products-display__load-more-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.products-display__load-more-btn:hover {
+  background-color: #1e40af;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.products-display__load-more-btn:active {
+  transform: translateY(0);
+}

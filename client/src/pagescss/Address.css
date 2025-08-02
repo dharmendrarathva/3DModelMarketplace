@@ -1,0 +1,142 @@
+.Address-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    color: #e5e7eb;
+}
+
+.Address-header {
+    background-color: #3c3c3c;;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #2f3031;
+}
+
+.Address-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #f9fafb;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Address-addButton {
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.2s;
+    font-weight: 500;
+    background-color: #353333;;
+}
+
+.Address-addButton:hover {
+    background-color: #201f1f;
+    color: white;
+}
+
+.Address-list {
+    background-color: rgba(17, 24, 39, 0.5);
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #374151;
+}
+
+.Address-card {
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: #1f2937;
+    display: flex;
+    gap: 1rem;
+    transition: all 0.2s;
+}
+
+.Address-card:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border-color: #4b5563;
+    transform: translateY(-1px);
+}
+
+.Address-details {
+    flex-grow: 1;
+}
+
+.Address-details p {
+    margin-bottom: 0.5rem;
+    color: #d1d5db;
+}
+
+.Address-actions {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+}
+
+.Address-editButton {
+    background-color: rgba(16, 185, 129, 0.1);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    color: #10b981;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.Address-editButton:hover {
+    background-color: #10b981;
+    color: white;
+}
+
+.Address-deleteButton {
+    background-color: rgba(239, 68, 68, 0.1);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    color: #ef4444;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.Address-deleteButton:hover {
+    background-color: #ef4444;
+    color: white;
+}
+.Address-addNewCard {
+    height: 3rem;
+    width: 15rem;
+    background-color: #252627;
+    border: solid 1px #b3b3b3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 500;
+    margin: 0 auto; /* This centers the element horizontally */
+    transition: all 0.2s ease; /* Smooth hover effects */
+}
+
+.Address-addNewCard:hover {
+    background-color: #2f2f30;
+    border-color: #d1d1d1;
+}
+
+
+/* For the modal overlay (if needed) */
+.Address-modalOverlay {
+    background-color: rgba(0, 0, 0, 0.8);
+}

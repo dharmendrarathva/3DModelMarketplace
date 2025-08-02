@@ -39,12 +39,12 @@ const userSchema = new mongoose.Schema({
         enum : ["Active","Inactive","Suspended"],
         default : "Active"
     },
-   /*  address_details : [
+    address_details : [
         {
             type : mongoose.Schema.ObjectId,
             ref : 'address'
         }
-    ], */
+    ],
     shopping_cart : [
         {
             type : mongoose.Schema.ObjectId,
@@ -57,14 +57,14 @@ const userSchema = new mongoose.Schema({
             ref : 'order'
         }
     ],
-   /*  forgot_password_otp : {
+    forgot_password_otp : {
         type : String,
         default : null
     },
     forgot_password_expiry : {
         type : Date,
         default : ""
-    }, */
+    },
     role : {
         type : String,
         enum : ['ADMIN',"USER"],

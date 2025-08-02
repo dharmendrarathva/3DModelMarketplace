@@ -9,14 +9,7 @@ const Model = ({ modelPath }) => {
 
 const ThreeDViewer = ({ modelPath }) => {
   return (
-    <Canvas camera={{ position: [0, 1, 3] }}>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[2, 2, 2]} intensity={1} />
-      <Suspense fallback={null}>
-        <Model modelPath={modelPath} />
-      </Suspense>
-      <OrbitControls />
-    </Canvas>
+   <div></div>
   );
 };
 

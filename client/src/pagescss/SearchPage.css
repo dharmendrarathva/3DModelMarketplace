@@ -1,0 +1,99 @@
+.search-page-container {
+  width: 100%;
+  min-height: calc(100vh - 80px); /* Adjust based on your header height */
+  display: flex;
+  align-items: flex-start; /* Changed from center to flex-start */
+  justify-content: center;
+  background-color: #262626;
+  padding: 2rem 0; /* Added padding */
+}
+
+.search-page-content {
+  width: 100%;
+  max-width: 1455px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.search-results-title {
+  font-weight: 600;
+  color: white;
+  font-size: 1rem; /* Increased size */
+  margin-bottom: 1rem; /* Added margin */
+}
+
+.infinite-scroll-container {
+  overflow: visible !important;
+  width: 100%;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem; /* Increased gap */
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem; /* Larger gap on bigger screens */
+  }
+}
+
+.no-results-container,
+.search-prompt-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 24rem;
+  margin: 4rem auto; /* Increased margin */
+  background-color: #404040;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  border-radius: 0.75rem;
+  padding: 2rem; /* Increased padding */
+}
+
+.no-results-icon {
+  font-size: 6rem; /* Slightly reduced size */
+  color: #a3a3a3;
+  margin: 0 auto 1.5rem;
+}
+
+.search-prompt-icon {
+  font-size: 6rem; /* Slightly reduced size */
+  color: #a3a3a3;
+  margin: 0 auto 1.5rem;
+}
+
+.no-results-text,
+.search-prompt-text {
+  font-weight: 600;
+  color: #f3f4f6;
+  font-size: 1.25rem; /* Increased size */
+  margin-bottom: 0.5rem;
+}
+
+.search-suggestions {
+  font-size: 1rem; /* Increased size */
+  color: #e5e7eb;
+  margin-top: 1rem; /* Increased margin */
+  text-align: center;
+  line-height: 1.5; /* Better readability */
+}
+
+.suggestion-highlight {
+  color: #e5e5e5;
+  font-weight: 600;
+  background-color: #525252; /* Added background */
+  padding: 0.2rem 0.4rem; /* Added padding */
+  border-radius: 0.25rem; /* Added border radius */
+}

@@ -1,0 +1,67 @@
+/* pagescss/MyOrders.css */
+.my-orders-container {
+    min-height: 80vh;
+    background-color: rgb(243 244 246);
+    padding: 2.5rem 1rem;
+}
+
+.my-orders-content {
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.my-orders-title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    text-align: center;
+    color: rgb(31 41 55);
+    margin-bottom: 2rem;
+}
+
+.my-orders-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 4rem 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.my-orders-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    color: rgb(239 68 68);
+    margin-bottom: 1rem;
+}
+
+.my-orders-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    color: rgb(55 65 81);
+    margin-bottom: 0.5rem;
+}
+
+.my-orders-message {
+    color: rgb(107 114 128);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.my-orders-button {
+    background-color: rgb(37 99 235);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition-property: background-color;
+    transition-duration: 150ms;
+}
+
+.my-orders-button:hover {
+    background-color: rgb(29 78 216);
+}

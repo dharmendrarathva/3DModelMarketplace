@@ -9,9 +9,9 @@ import CofirmBox from '../components/CofirmBox';
 import toast from 'react-hot-toast';
 import AxiosToastError from '../utils/AxiosToastError';
 import { Plus } from "lucide-react";
-import { FaEdit } from 'react-icons/fa';  // Importing FaEdit icon
+import { FaEdit } from 'react-icons/fa';
 import { FaTrashAlt } from "react-icons/fa";
-
+import '../pagescss/CategoryPage.css'; // Assuming you have a CSS file for styling
 
 const CategoryPage = () => {
     const [openUploadCategory, setOpenUploadCategory] = useState(false);
@@ -62,15 +62,15 @@ const CategoryPage = () => {
     };
 
     return (
-        <section className="p-4 max-w-7xl mx-auto">
+        <section className="CategoryPage-page">
             {/* Header Section */}
-            <div className="bg-white shadow-lg p-4 flex items-center justify-between rounded-lg">
-                <h2 className="text-xl font-semibold text-gray-800">Categories</h2>
+            <div className="CategoryPage-header">
+                <h2>Categories</h2>
                 <button
                     onClick={() => setOpenUploadCategory(true)}
-                    className="flex items-center gap-2 text-white font-bold bg-black hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-all duration-300 px-6 py-3 rounded-lg text-sm shadow-md hover:shadow-lg active:scale-95"
+                    className="CategoryPage-add-category-btn"
                 >
-                    <Plus className="w-5 h-5" />
+                    <Plus className="CategoryPage-icon" />
                     Add Category
                 </button>
             </div>
@@ -80,37 +80,38 @@ const CategoryPage = () => {
             ) : categoryData.length === 0 ? (
                 <NoData />
             ) : (
-                <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-3 gap-4">
+                <div className="CategoryPage-grid">
                     {categoryData.map((category) => (
                         <div
                             key={category._id}
-                            className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col items-center p-6 hover:shadow-xl transition-shadow duration-300 w-[280px] h-[270px]"    >
+                            className="CategoryPage-card"
+                        >
                             <img
                                 alt={category.name}
                                 src={category.image}
-                                className="w-full h-32 object-contain mb-4"
+                                className="CategoryPage-image"
                             />
-                            <p className="text-center font-medium mt-2 text-gray-700">{category.name}</p>
-                            <div className="flex gap-4 w-full mt-4">
+                            <p className="CategoryPage-name">{category.name}</p>
+                            <div className="CategoryPage-actions">
                                 <button
                                     onClick={() => {
                                         setOpenEdit(true);
                                         setEditData(category);
                                     }}
-                                    className="flex items-center justify-center w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    className="CategoryPage-edit-btn"
                                 >
-                                    <FaEdit size={16} className="mr-2" />
-                                    <span className="font-semibold text-sm">Edit</span>
+                                    <FaEdit className="CategoryPage-action-icon" />
+                                    <span>Edit</span>
                                 </button>
                                 <button
                                     onClick={() => {
                                         setOpenConfirmBoxDelete(true);
                                         setDeleteCategory(category);
                                     }}
-                                    className="flex items-center justify-center w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500"
+                                    className="CategoryPage-delete-btn"
                                 >
-                                    <FaTrashAlt size={16} className="mr-2" />
-                                    <span className="font-semibold text-sm">Remove</span>
+                                    <FaTrashAlt className="CategoryPage-action-icon" />
+                                    <span>Remove</span>
                                 </button>
                             </div>
                         </div>

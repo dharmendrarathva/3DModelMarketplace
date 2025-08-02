@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import SummaryApi from '../common/SummaryApi'
-import AxiosToastError from '../utils/AxiosToastError'
-import Axios from '../utils/Axios'
-import Loading from '../components/Loading'
-import ProductCardAdmin from '../components/ProductCardAdmin'
+import React, { useEffect, useState } from 'react';
+import SummaryApi from '../common/SummaryApi';
+import AxiosToastError from '../utils/AxiosToastError';
+import Axios from '../utils/Axios';
+import Loading from '../components/Loading';
+import ProductCardAdmin from '../components/ProductCardAdmin';
 import { IoSearchOutline } from "react-icons/io5";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import '../pagescss/ProductAdmin.css';
 
 const ProductAdmin = () => {
-  const [productData, setProductData] = useState([])
-  const [page, setPage] = useState(1)
-  const [loading, setLoading] = useState(false)
-  const [totalPageCount, setTotalPageCount] = useState(1)
-  const [search, setSearch] = useState("")
+  const [productData, setProductData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [totalPageCount, setTotalPageCount] = useState(1);
+  const [search, setSearch] = useState("");
 
   const fetchProductData = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await Axios({
         ...SummaryApi.getProduct,
         data: {
@@ -23,95 +25,119 @@ const ProductAdmin = () => {
           limit: 12,
           search: search
         }
-      })
+      });
 
-      const { data: responseData } = response
+      const { data: responseData } = response;
 
       if (responseData.success) {
-        setTotalPageCount(responseData.totalNoPage)
-        setProductData(responseData.data)
+        setTotalPageCount(responseData.totalNoPage);
+        setProductData(responseData.data);
       }
 
     } catch (error) {
-      AxiosToastError(error)
+      AxiosToastError(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchProductData()
-  }, [page])
+    fetchProductData();
+  }, [page]);
 
   const handleNext = () => {
     if (page !== totalPageCount) {
-      setPage(prev => prev + 1)
+      setPage(prev => prev + 1);
     }
-  }
+  };
+  
   const handlePrevious = () => {
     if (page > 1) {
-      setPage(prev => prev - 1)
+      setPage(prev => prev - 1);
     }
-  }
+  };
 
   const handleOnChange = (e) => {
-    const { value } = e.target
-    setSearch(value)
-    setPage(1)
-  }
+    const { value } = e.target;
+    setSearch(value);
+    setPage(1);
+  };
 
   useEffect(() => {
-    let flag = true
+    let flag = true;
 
     const interval = setTimeout(() => {
       if (flag) {
-        fetchProductData()
-        flag = false
+        fetchProductData();
+        flag = false;
       }
     }, 300);
 
     return () => {
-      clearTimeout(interval)
-    }
-  }, [search])
+      clearTimeout(interval);
+    };
+  }, [search]);
 
   return (
-    <section className=''>
-      <div className='p-2 bg-white shadow-md flex items-center justify-between gap-4'>
-        <h2 className='font-semibold'>Product</h2>
-        <div className='h-full min-w-24 max-w-56 w-full ml-auto bg-blue-50 px-4 flex items-center gap-3 py-2 rounded border focus-within:border-primary-200'>
-          <IoSearchOutline size={25} />
+    <section className="product-admin-page">
+      <div className="product-admin-header">
+        <h2>Products</h2>
+        <div className="search-container">
+          <IoSearchOutline className="search-icon" />
           <input
-            type='text'
-            placeholder='Search product here ...'
-            className='h-full w-full outline-none bg-transparent'
+            type="text"
+            placeholder="Search products..."
             value={search}
             onChange={handleOnChange}
           />
         </div>
       </div>
 
-      {loading && <Loading />}
+      {loading && <Loading />}  
 
-      <div className='p-4 bg-blue-50'>
-        <div className='min-h-[55vh]'>
-          <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
-            {
-              productData.map((p, index) => (
-                <ProductCardAdmin key={p._id || index} data={p} fetchProductData={fetchProductData} />
-              ))
-            }
-          </div>
+      <div className="product-content">
+        <div className="product-grid-container">
+          {productData.length > 0 ? (
+            <div className="product-grid">
+              {productData.map((p, index) => (
+                <ProductCardAdmin 
+                  key={p._id || index} 
+                  data={p} 
+                  fetchProductData={fetchProductData} 
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="no-products">
+              {!loading && "No products found"}
+            </div>
+          )}
         </div>
 
-        <div className='flex justify-between my-4 items-center gap-4'>
-          <button onClick={handlePrevious} className="border border-primary-200 px-4 py-1 rounded hover:bg-primary-200">Previous</button>
-          <span className='w-full text-center text-sm bg-slate-100 py-1 rounded'>{page}/{totalPageCount}</span>
-          <button onClick={handleNext} className="border border-primary-200 px-4 py-1 rounded hover:bg-primary-200">Next</button>
+        <div className="pagination-controls">
+          <button 
+            onClick={handlePrevious} 
+            disabled={page === 1}
+            className="pagination-btn"
+          >
+            <FiChevronLeft />
+            Previous
+          </button>
+          <span className="page-indicator">
+            {page}/{totalPageCount}
+          </span>
+          <button 
+            onClick={handleNext} 
+            disabled={page === totalPageCount}
+            className="pagination-btn"
+          >
+            Next
+            <FiChevronRight />
+          </button>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ProductAdmin
+export default ProductAdmin;

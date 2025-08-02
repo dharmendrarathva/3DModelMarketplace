@@ -1,0 +1,36 @@
+/* pagescss/Favourites.css */
+.favourites-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+}
+
+.favourites-title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.favourites-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .favourites-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .favourites-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.favourites-empty-message {
+    color: rgb(75, 85, 99);
+}

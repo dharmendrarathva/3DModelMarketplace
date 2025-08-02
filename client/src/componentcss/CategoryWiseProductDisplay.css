@@ -1,0 +1,99 @@
+/* Section Container */
+.CategoryWiseProductDisplay {
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+/* Header */
+.CategoryWiseProductDisplay-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.CategoryWiseProductDisplay-title {
+  font-weight: 600;
+  color: white;
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .CategoryWiseProductDisplay-title {
+    font-size: 1.25rem;
+  }
+}
+
+.CategoryWiseProductDisplay-see-all-link {
+  color: white;
+  transition: color 0.2s ease;
+}
+
+.CategoryWiseProductDisplay-see-all-link:hover {
+  color: #60a5fa;
+}
+
+/* Product Slider */
+.CategoryWiseProductDisplay-slider-container {
+  position: relative;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.CategoryWiseProductDisplay-slider {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.CategoryWiseProductDisplay-slider::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .CategoryWiseProductDisplay-slider {
+    gap: 1.5rem;
+  }
+}
+
+/* Navigation Buttons */
+.CategoryWiseProductDisplay-slider-navigation {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  padding: 0 1rem;
+  transform: translateY(-50%);
+  display: none;
+  justify-content: space-between;
+}
+
+@media (min-width: 1024px) {
+  .CategoryWiseProductDisplay-slider-navigation {
+    display: flex;
+    padding: 0 2.5rem;
+  }
+}
+
+.CategoryWiseProductDisplay-nav-button {
+  background: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-size: 1.125rem;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CategoryWiseProductDisplay-nav-button:hover {
+  background: #9ca3af;
+}

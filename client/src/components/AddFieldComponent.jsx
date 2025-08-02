@@ -1,29 +1,66 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { IoClose } from "react-icons/io5";
+import '../componentcss/AddFieldComponent.css';
 
-const AddFieldComponent = ({close,value,onChange,submit}) => {
+const AddFieldComponent = ({ close, value, onChange, submit }) => {
+  const [error, setError] = useState('');
+
+  const handleSubmit = () => {
+    if (value.trim().length < 3) {
+      setError('Field name have must be at least 3 characters long.');
+    } else {
+      setError('');
+      submit();
+    }
+  };
+
+  const suggestions = [
+    'Extra Information',
+    'Texture Type',
+    'Render Engine',
+    'Model Format',
+    'Rigged / Animated',
+    'Compatible Software',
+    'File Size'
+  ];
+
   return (
-   <section className='fixed top-0 bottom-0 right-0 left-0 bg-neutral-900 bg-opacity-70 z-50 flex justify-center items-center p-4'>
-        <div className='bg-white rounded p-4 w-full max-w-md'>
-            <div className='flex items-center justify-between gap-3'>
-                <h1 className='font-semibold'>Add Field</h1>
-                <button onClick={close}>
-                    <IoClose size={25}/>
-                </button>
-            </div>
-            <input
-                 className='bg-blue-50 my-3 p-2 border outline-none focus-within:border-primary-100 rounded w-full '
-                 placeholder='Enter field name'
-                 value={value}
-                 onChange={onChange}
-            />
-            <button
-                onClick={submit}
-                className='bg-primary-200 hover:bg-primary-100 px-4 py-2 rounded mx-auto w-fit block'
-            >Add Field</button>
+    <section className="add-field">
+      <div className="add-field__container">
+        <div className="add-field__header">
+          <h1 className="add-field__title">Add Field</h1>
+          <button onClick={close} className="add-field__close-btn">
+            <IoClose size={28} />
+          </button>
         </div>
-   </section>
-  )
-}
 
-export default AddFieldComponent
+        <input
+          className="add-field__input"
+          placeholder="Enter field name"
+          value={value}
+          onChange={onChange}
+        />
+        {error && (
+          <p className="add-field__error-message">
+            {error}
+          </p>
+        )}
+
+        <button onClick={handleSubmit} className="add-field__submit-btn">
+          Add Field
+        </button>
+
+        <div className="add-field__suggestions">
+          <p className="add-field__suggestions-title">Suggestions:</p>
+          <ul className="add-field__suggestions-list">
+            {suggestions.map((suggestion, index) => (
+              <li key={index} className="add-field__suggestion-item">{suggestion}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AddFieldComponent;

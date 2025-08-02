@@ -1,0 +1,208 @@
+/* Modal Overlay */
+.UploadSubCategoryModel-overlay {
+  position: fixed;
+  inset: 0;
+  padding: 1rem;
+  background-color: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal Box */
+.UploadSubCategoryModel-container {
+  background-color: #1f2937;
+  color: #f9fafb;
+  max-width: 40rem;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  font-family: 'Segoe UI', sans-serif;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; 
+}
+
+.UploadSubCategoryModel-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+/* Modal Header */
+.UploadSubCategoryModel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.UploadSubCategoryModel-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.UploadSubCategoryModel-closeButton {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.UploadSubCategoryModel-closeButton:hover {
+  color: #f87171;
+}
+
+/* Form */
+.UploadSubCategoryModel-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.UploadSubCategoryModel-formGroup label,
+.UploadSubCategoryModel-formGroup p {
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.UploadSubCategoryModel-input,
+.UploadSubCategoryModel-selectInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #374151;
+  border: 1px solid #4b5563;
+  border-radius: 0.5rem;
+  color: #f9fafb;
+  font-size: 1rem;
+  outline: none;
+}
+
+.UploadSubCategoryModel-input:focus,
+.UploadSubCategoryModel-selectInput:focus {
+  border-color: #414243;
+}
+
+/* Image Upload */
+.UploadSubCategoryModel-imageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .UploadSubCategoryModel-imageContainer {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.UploadSubCategoryModel-imagePreview {
+  border: 1px dashed #4b5563;
+  background-color: #111827;
+  height: 9rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .UploadSubCategoryModel-imagePreview {
+    width: 9rem;
+  }
+}
+
+.UploadSubCategoryModel-previewImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.UploadSubCategoryModel-placeholderText {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.UploadSubCategoryModel-uploadButton {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+.UploadSubCategoryModel-uploadButton:hover {
+  background-color: #2563eb;
+}
+
+.UploadSubCategoryModel-fileInput {
+  display: none;
+}
+
+/* Category Tag System */
+.UploadSubCategoryModel-categorySelector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.UploadSubCategoryModel-selectedCategories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.UploadSubCategoryModel-categoryTag {
+  background-color: #656c72;
+  color: #ffffff;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.875rem;
+}
+
+.UploadSubCategoryModel-removeCategory {
+  color: #f5f5f5;
+  cursor: pointer;
+}
+
+.UploadSubCategoryModel-removeCategory:hover {
+  color: #ff0000;
+}
+
+/* Submit Button */
+.UploadSubCategoryModel-submitButton {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.UploadSubCategoryModel-submitButton.UploadSubCategoryModel-enabled {
+  background-color: #10b981;
+  color: white;
+}
+
+.UploadSubCategoryModel-submitButton.UploadSubCategoryModel-enabled:hover {
+  background-color: #059669;
+  transform: translateY(-1px);
+}
+
+.UploadSubCategoryModel-submitButton.UploadSubCategoryModel-disabled {
+  background-color: #6b7280;
+  color: white;
+  cursor: not-allowed;
+}

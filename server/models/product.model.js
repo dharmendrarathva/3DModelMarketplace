@@ -47,7 +47,12 @@ const productSchema = new mongoose.Schema({
     zipFile: {
     type: Object,
     default: null
+},
+views: {
+    type: Number,
+    default: 0
 }
+
 
 },{
     timestamps : true

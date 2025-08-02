@@ -1,0 +1,49 @@
+/* AddToCartButton.css */
+.cart-btn {
+  position: relative;
+  width: 100%;
+  max-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animation Styling */
+.cart-btn__add-animation {
+  position: absolute;
+  top: -1.5rem;
+  color: white;
+  z-index: 25;
+}
+
+.cart-btn__delete-animation {
+  position: absolute;
+  bottom: -1.5rem;
+  color: #b91c1c; /* red-700 */
+  z-index: 10;
+}
+
+/* Button Styles */
+.cart-btn__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  transition: all 0.2s ease-in-out;
+  color: white;
+  font-size: 1rem;
+  background-color: #262626;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-btn__button:hover {
+  background-color: #171717;
+  transform: scale(1.05);
+}
+
+.cart-btn__button:active {
+  transform: scale(0.98);
+}
+

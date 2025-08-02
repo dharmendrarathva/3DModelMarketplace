@@ -1,104 +1,95 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { FaUser, FaShoppingBag, FaHeart, FaStore, FaUserPlus, FaSignOutAlt, FaBoxOpen, FaBars, FaShoppingCart, FaUserCircle } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  FaUser,
+  FaShoppingBag,
+  FaHeart,
+  FaStore,
+  FaUserPlus,
+  FaSignOutAlt,
+  FaBoxOpen,
+  FaBars,
+  FaShoppingCart
+} from 'react-icons/fa';
+import toast from 'react-hot-toast';
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
-import toast from 'react-hot-toast';
 import AxiosToastError from '../utils/AxiosToastError';
-import { useDispatch } from 'react-redux';
 import { logout } from '../store/userSlice';
-import { useNavigate } from 'react-router-dom';
-import { HiOutlineExternalLink } from "react-icons/hi";
-import isAdmin from '../utils/isAdmin'; // Import isAdmin function
+import isAdmin from '../utils/isAdmin';
+import '../componentcss/UserMenu.css';
 
-const UserMenu = ({ close }) => {
+const UserMenu = ({ close = () => {} }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      const response = await Axios({
-        ...SummaryApi.logout
-      });
-      console.log("logout", response);
+      const response = await Axios({ ...SummaryApi.logout });
       if (response.data.success) {
-        if (close) {
-          close();
-        }
         dispatch(logout());
         localStorage.clear();
         toast.success(response.data.message);
-        navigate("/");
+        navigate('/');
+        close();
       }
     } catch (error) {
-      console.log(error);
       AxiosToastError(error);
     }
   };
-
-  const handleClose = () => {
-    if (close) {
-      close();
-    }
-  };
+    const handleClose = ()=>{
+      if(close){
+        close()
+      }
+   }
 
   return (
-    <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-md p-2 z-10">
-      <div className="text-lg flex items-center justify-between gap-2 font-bold">
-        <div className="flex items-center gap-2">
-          <FaUserCircle size={22} />
-          <span className="text-ellipsis line-clamp-1">{user.name || user.mobile}</span>
-          <span className="text-medium text-red-600 font-normal">
-            {user.role === "ADMIN" ? "(Admin)" : ""}
-          </span>
-        </div>
-
-        <Link onClick={handleClose} to={"/dashboard/profile"} className="hover:text-primary-200">
-          <HiOutlineExternalLink size={22} />
+    <div className="user-menu">
+      <nav className="user-menu__nav">
+        <Link to="/dashboard/profile" onClick={close} className="user-menu__link">
+          <FaUser className="user-menu__icon" /> My Profile
         </Link>
-      </div>
 
-      <hr className="my-2" />
+        {isAdmin(user.role) && (
+          <>
+            <Link to="/dashboard/product" onClick={close} className="user-menu__link">
+              <FaBoxOpen className="user-menu__icon" /> 3D Model
+            </Link>
+            <Link to="/dashboard/upload-product" onClick={close} className="user-menu__link">
+              <FaBoxOpen className="user-menu__icon" /> Upload 3D Model
+            </Link>
+            <Link to="/dashboard/category" onClick={close} className="user-menu__link">
+              <FaShoppingBag className="user-menu__icon" /> Category
+            </Link>
+            <Link to="/dashboard/subcategory" onClick={close} className="user-menu__link">
+              <FaBars className="user-menu__icon" /> Sub Category
+            </Link>
+          </>
+        )}
 
-      <Link to="/dashboard/profile" onClick={handleClose} className="flex px-4 py-2 items-center gap-2 hover:bg-gray-100">
-        <FaUser /> My Profile
-      </Link>
+        <Link to="/dashboard/my-orders" onClick={close} className="user-menu__link">
+          <FaShoppingCart className="user-menu__icon" /> Orders
+        </Link>
+        <Link to="/dashboard/Seller3DModel" onClick={close} className="user-menu__link">
+          <FaStore className="user-menu__icon" /> Donate Free Model
+        </Link>
+        <Link to="/register" onClick={close} className="user-menu__link">
+          <FaUserPlus className="user-menu__icon" /> New Register
+        </Link>
+           <Link onClick={handleClose} to={"/dashboard/address"} className="user-menu__link"> 
+           <FaHeart className="user-menu__icon" />Save Address
+           </Link>
+      </nav>
 
-      {isAdmin(user.role) && (
-        <>
-          <Link to="/dashboard/product" onClick={handleClose} className="flex px-4 py-2 items-center gap-2 hover:bg-gray-100">
-            <FaBoxOpen /> 3D Model
-          </Link>
-          <Link to="/dashboard/upload-product" onClick={handleClose} className="flex px-4 py-2 items-center gap-2 hover:bg-gray-100">
-            <FaBoxOpen /> Upload 3D Model
-          </Link>
-          <Link to="/dashboard/category" onClick={handleClose} className="flex px-4 py-2 items-center gap-2 hover:bg-gray-100">
-            <FaShoppingBag /> Category
-          </Link>
-          <Link to="/dashboard/subcategory" onClick={handleClose} className="flex px-4 py-2 items-center gap-2 hover:bg-gray-100">
-            <FaBars /> Sub Category
-          </Link>
-        </>
-      )}
+      <hr className="user-menu__divider" />
 
-      <Link to="/dashboard/my-orders" onClick={handleClose} className="flex px-4 py-2 items-center gap-2 hover:bg-gray-100">
-        <FaShoppingCart /> Orders
-      </Link>
-      <Link to="/dashboard/address" onClick={handleClose} className="flex px-4 py-2 items-center gap-2 hover:bg-gray-100">
-        <FaHeart /> About You
-      </Link>
-      <Link to="/dashboard/Seller3DModel" onClick={handleClose} className="flex px-4 py-2 items-center gap-2 hover:bg-gray-100">
-        <FaStore /> Sell Own 3D Model
-      </Link>
-      <Link to="/register" onClick={handleClose} className="flex px-4 py-2 items-center gap-2 hover:bg-gray-100">
-        <FaUserPlus /> New Register
-      </Link>
-
-      <hr className="my-2" />
-      <button onClick={handleLogout} className="flex px-4 py-2 text-lg font-semibold text-gray-900 hover:bg-gray-100 items-center gap-2">
-        <FaSignOutAlt /> Log out
+      <button
+        onClick={handleLogout}
+        className="user-menu__logout-btn"
+      >
+        <FaSignOutAlt className="user-menu__icon" /> Log out
       </button>
     </div>
   );

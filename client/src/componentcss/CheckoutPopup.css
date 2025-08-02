@@ -1,0 +1,181 @@
+.CheckoutPopup-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  padding: 65px 20px;
+  animation: slideDown 0.4s ease-out;
+}
+
+.CheckoutPopup-container {
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+}
+
+.CheckoutPopup-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.CheckoutPopup-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.CheckoutPopup-check-icon {
+  color: #4CAF50;
+  font-size: 1.2rem;
+}
+
+.CheckoutPopup-close-btn {
+  background: none;
+  border: none;
+  color: #494646;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 5px;
+  margin: -5px -5px 0 0;
+  transition: color 0.2s;
+}
+
+.CheckoutPopup-close-btn:hover {
+  color: #8f3535;
+}
+
+.CheckoutPopup-item-container {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.CheckoutPopup-image-container {
+  width: 200px;
+  height: 120px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CheckoutPopup-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.CheckoutPopup-item-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 30px;
+}
+
+.CheckoutPopup-item-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+
+.CheckoutPopup-item-formats {
+  font-size: 0.8rem;
+  color: #282727;
+ 
+}
+
+.CheckoutPopup-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #000000;
+ 
+}
+
+.CheckoutPopup-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.CheckoutPopup-btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.CheckoutPopup-btn-continue {
+  background-color: #f5f5f5;
+  color: #000000;
+  border: 1px solid #9e9797;
+}
+
+.CheckoutPopup-btn-continue:hover { 
+  background-color: #bcbabe;
+}
+
+.CheckoutPopup-btn-checkout {
+  background-color: #000000;
+  color: white;
+  border: 1px solid #959292;
+}
+
+.CheckoutPopup-btn-checkout:hover {
+  background-color:  #323234;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .CheckoutPopup-wrapper {
+    padding: 15px;
+  }
+  
+  .CheckoutPopup-container {
+    padding: 15px;
+  }
+  
+  .CheckoutPopup-item-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .CheckoutPopup-image-container {
+    width: 100%;
+    height: 120px;
+  }
+  
+  .CheckoutPopup-buttons {
+    flex-direction: column;
+  }
+}

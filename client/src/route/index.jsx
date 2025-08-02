@@ -14,7 +14,7 @@ import CategoryPage from "../pages/CategoryPage";
 import SubCategoryPage from "../pages/SubCategoryPage";
 import UploadProduct from "../pages/UploadProduct";
 import ProductAdmin from "../pages/ProductAdmin";
-import Aboutyou from "../pages/Aboutyou";
+import Address from "../pages/Address";
 import Seller3DModel from "../pages/Seller3DModel";
 import AdminPermision from "../layouts/AdminPermision";
 import ProductListPage from "../pages/ProductListPage";
@@ -22,6 +22,10 @@ import ProductDisplayPage from "../pages/ProductDisplayPage";
 import CartMobile from "../pages/CartMobile";
 import CheckoutPage from "../pages/CheckoutPage";
 import Favourites from "../pages/Favourites";
+import Success from "../pages/Success";
+import Cancel from "../pages/Cancel";
+
+
 //import Zip from "../components/Zip";
 
 const router = createBrowserRouter([
@@ -67,7 +71,9 @@ const router = createBrowserRouter([
                     },  {
                         path : "my-orders",
                         element : <MyOrders/>
-                    },
+                    }, 
+                    
+
                     {
                         path : 'category',
                         element : <AdminPermision><CategoryPage/></AdminPermision>
@@ -86,7 +92,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path : "address",
-                        element : <Aboutyou/>
+                        element : <Address/>
                     },
                     {
                         path : "Seller3DModel",
@@ -116,11 +122,19 @@ const router = createBrowserRouter([
             {
                 path : "checkout",
                 element : <CheckoutPage/>
-            },
+            }
             ,
             {
                 path : "Favourites",
                 element : <Favourites/>
+            },
+             {
+                path : "success",
+                element : <Success/>
+            },
+            {
+                path : 'cancel',
+                element : <Cancel/>
             }
         ]
     } 

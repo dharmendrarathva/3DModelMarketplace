@@ -5,6 +5,7 @@ import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import toast from 'react-hot-toast';
 import AxiosToastError from '../utils/AxiosToastError';
+import '../componentcss/UploadCategoryModel.css';
 
 const UploadCategoryModel = ({ close, fetchData }) => {
     const [data, setData] = useState({ name: "", image: "" });
@@ -36,48 +37,70 @@ const UploadCategoryModel = ({ close, fetchData }) => {
     const handleUploadCategoryImage = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
+        setLoading(true);
         const response = await uploadImage(file);
         const { data: ImageResponse } = response;
+        setLoading(false);
         setData(prev => ({ ...prev, image: ImageResponse.data.url }));
     };
 
     return (
-        <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center'>
-            <div className='bg-white max-w-4xl w-full p-4 rounded'>
-                <div className='flex items-center justify-between'>
-                    <h1 className='font-semibold'>Category</h1>
-                    <button onClick={close} className='w-fit block ml-auto'>
+        <section className="UploadCategoryModel-overlay">
+            <div className="UploadCategoryModel-container">
+                <div className="UploadCategoryModel-header">
+                    <h1 className="UploadCategoryModel-title">Category</h1>
+                    <button onClick={close} className="UploadCategoryModel-closeButton">
                         <IoClose size={25} />
                     </button>
                 </div>
-                <form className='my-3 grid gap-2' onSubmit={handleSubmit}>
-                    <div className='grid gap-1'>
-                        <label htmlFor='categoryName'>Name</label>
+                <form className="UploadCategoryModel-form" onSubmit={handleSubmit}>
+                    <div className="UploadCategoryModel-formGroup">
+                        <label htmlFor="categoryName">Name</label>
                         <input
-                            type='text'
-                            id='categoryName'
-                            placeholder='Enter category name'
+                            type="text"
+                            id="categoryName"
+                            placeholder="Enter category name"
                             value={data.name}
-                            name='name'
+                            name="name"
                             onChange={handleOnChange}
-                            className='bg-blue-50 p-2 border border-blue-100 focus-within:border-primary-200 outline-none rounded'
+                            className="UploadCategoryModel-input"
                         />
                     </div>
-                    <div className='grid gap-1'>
-                        <p>Image</p>
-                        <div className='flex gap-4 flex-col lg:flex-row items-center'>
-                            <div className='border bg-blue-50 h-36 w-full lg:w-36 flex items-center justify-center rounded'>
-                                {data.image ? <img alt='category' src={data.image} className='w-full h-full object-scale-down' /> : <p className='text-sm text-neutral-500'>No Image</p>}
+                    <div className="UploadCategoryModel-formGroup">
+                        <p className="UploadCategoryModel-imageLabel">Image</p>
+                        <div className="UploadCategoryModel-imageUploadContainer">
+                            <div className="UploadCategoryModel-imagePreview">
+                                {data.image ? (
+                                    <img 
+                                        alt="category" 
+                                        src={data.image} 
+                                        className="UploadCategoryModel-previewImage" 
+                                    />
+                                ) : (
+                                    <p className="UploadCategoryModel-noImageText">No Image</p>
+                                )}
                             </div>
-                            <label htmlFor='uploadCategoryImage'>
-                                <div className={`${!data.name ? "bg-gray-300" : "border-primary-200 hover:bg-primary-100"} px-4 py-2 rounded cursor-pointer border font-medium`}>
-                                    Upload Image
+                            <label htmlFor="uploadCategoryImage">
+                                <div className={`UploadCategoryModel-uploadButton ${!data.name ? "UploadCategoryModel-disabled" : ""}`}>
+                                    {loading ? "Uploading..." : "Upload Image"}
                                 </div>
-                                <input disabled={!data.name} onChange={handleUploadCategoryImage} type='file' id='uploadCategoryImage' className='hidden' />
+                                <input 
+                                    disabled={!data.name || loading} 
+                                    onChange={handleUploadCategoryImage} 
+                                    type="file" 
+                                    id="uploadCategoryImage" 
+                                    className="UploadCategoryModel-fileInput" 
+                                />
                             </label>
                         </div>
                     </div>
-                    <button className={`${data.name && data.image ? "bg-primary-200 hover:bg-primary-100" : "bg-gray-300"} py-2 font-semibold`}>Add Category</button>
+                    <button 
+                        type="submit"
+                        className={`UploadCategoryModel-submitButton ${data.name && data.image ? "UploadCategoryModel-active" : "UploadCategoryModel-disabled"}`}
+                        disabled={!data.name || !data.image || loading}
+                    >
+                        {loading ? "Processing..." : "Add Category"}
+                    </button>
                 </form>
             </div>
         </section>

@@ -1,0 +1,185 @@
+/* Login Container */
+.Login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #111827, #171717);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Login Card */
+.Login-card {
+  width: 100%;
+  max-width: 28rem;
+  background: rgba(38, 38, 38, 0.9);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 80px;
+}
+
+.Login-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Login Header */
+.Login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+.Login-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #f3f4f6;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.5px;
+}
+
+.Login-subtitle {
+  font-size: 1rem;
+  color: #9ca3af;
+}
+
+/* Login Alert */
+.Login-alert {
+  color: #c95858;
+  text-align: center;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+
+/* Login Form */
+.Login-form {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Input Groups */
+.Login-inputGroup {
+  display: grid;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.Login-label {
+  font-weight: 500;
+  color: #e5e7eb;
+  font-size: 0.95rem;
+}
+
+.Login-input {
+  width: 100%;
+  padding: 0.8rem 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px solid #4b5563;
+  background-color: #1f2937;
+  color: #f9fafb;
+  font-size: 0.95rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.Login-input::placeholder {
+  color: #9ca3af;
+}
+
+.Login-input:focus {
+  outline: none;
+  border-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Password Container */
+.Login-passwordContainer {
+  position: relative;
+}
+
+.Login-passwordToggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #000000;
+  transition: color 0.2s ease;
+}
+
+.Login-passwordToggle:hover {
+  color: #5c5e63;
+}
+
+/* Forgot Password Link */
+.Login-forgotPassword {
+  display: block;
+  margin-left: auto;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.Login-forgotPassword:hover {
+  color: #f3f4f6;
+  text-decoration: underline;
+}
+
+/* Login Button */
+.Login-button {
+  width: 100%;
+  padding: 0.85rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  background: linear-gradient(to right, #000000, #000000);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: scale(1);
+  border: 1px solid #4b5563;
+}
+
+.Login-button:hover {
+  background: black;
+  transform: scale(1.05);
+}
+
+.Login-buttonText {
+  display: block;
+}
+
+/* Footer */
+.Login-footer {
+  text-align: center;
+  margin-top: 1.75rem;
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+.Login-registerLink {
+  color: #f3f4f6;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: color 0.2s ease;
+}
+
+.Login-registerLink:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Error Message */
+.Login-errorMessage {
+  font-size: 0.85rem;
+  color: #ef4444;
+  margin-top: 0.25rem;
+}

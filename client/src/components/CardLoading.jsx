@@ -1,26 +1,26 @@
-import React from 'react'
-
+import React from 'react';
 const CardLoading = () => {
   return (
-    <div className='border py-2 lg:p-4 grid gap-1 lg:gap-3 min-w-36 lg:min-w-52 rounded cursor-pointer bg-white animate-pulse'>
-      <div className='min-h-24 bg-blue-50 rounded'>
-      </div>
-      <div className='p-2 lg:p-3  bg-blue-50 rounded w-20'>
-      </div>
-      <div className='p-2 lg:p-3 bg-blue-50 rounded'>
-      </div>
-      <div className='p-2 lg:p-3 bg-blue-50 rounded w-14'>
-      </div>
+    <div className="w-[340px] h-[290px] flex-shrink-0 bg-[#1c1c1c] border border-[#333] rounded-xl shadow-lg animate-pulse flex flex-col overflow-hidden">
+      
+      {/* Image placeholder */}
+      <div className="h-[180px] w-full bg-[#2a2a2a]" />
 
-      <div className='flex items-center justify-between gap-3'>
-        <div className='p-2 lg:p-3 bg-blue-50 rounded w-20'>
+      {/* Details */}
+      <div className="px-3 py-2 flex flex-col flex-grow justify-between">
+        <div className="mb-1 space-y-1">
+          <div className="h-4 w-3/4 bg-[#2a2a2a] rounded" />
+          <div className="h-3 w-1/2 bg-[#2a2a2a] rounded" />
+          <div className="h-3 w-1/3 bg-[#2a2a2a] rounded" />
         </div>
-        <div className='p-2 lg:p-3 bg-blue-50 rounded w-20'>
+
+        <div className="flex items-center">
+          <div className="h-5 w-12 bg-[#2a2a2a] rounded" />
+          <div className="ml-auto h-10 w-10 bg-[#2a2a2a] rounded-full" />
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default CardLoading
+export default CardLoading;

@@ -1,29 +1,70 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html{
-    scroll-behavior: smooth;
+
+html {
+  scroll-behavior: smooth;
 }
 
-body {
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    @apply bg-blue-50 text-black scroll-smooth;
+body, #root {
+  @apply font-sans bg-blue-50 text-black scroll-smooth;
+  font-family: 'Montserrat', sans-serif; /* Fallback if Tailwind fails */
+  
+  height: 100%;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 
-.scrollbar-none::-webkit-scrollbar{
-    display: none;
+body::-webkit-scrollbar {
+  display: none;                /* Chrome, Safari, Opera */
 }
 
-.scrollbarCustom::-webkit-scrollbar{
-    width: 10px;
-    @apply bg-slate-100
+/* Optional: Utility class to hide scrollbar but allow scroll */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.scrollbarCustom::-webkit-scrollbar-thumb{
-    @apply bg-blue-100 rounded-full
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Optional: Custom styled scrollbar class */
+.scrollbarCustom::-webkit-scrollbar {
+  width: 10px;
+  @apply bg-slate-100;
+}
+.scrollbarCustom::-webkit-scrollbar-thumb {
+  @apply bg-blue-100 rounded-full;
+}
+
+@keyframes waveMove {
+  0% {
+    background-position: 0% 0%;
+    transform: translateY(0);
+  }
+  50% {
+    background-position: -50% 0%;
+    transform: translateY(-10%);
+  }
+  100% {
+    background-position: -100% 0%;
+    transform: translateY(0);
+  }
+}
+
+.animate-waveMove {
+  animation: waveMove 12s linear infinite;
+}
+
+.bg-gradient-to-t {
+  background-size: 100% 200%;
 }

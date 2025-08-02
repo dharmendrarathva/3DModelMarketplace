@@ -1,129 +1,405 @@
-import React, { useState } from 'react';
-import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees';
-import { Link } from 'react-router-dom';
-import { valideURLConvert } from '../utils/valideURLConvert';
-import { pricewithDiscount } from '../utils/PriceWithDiscount';
-import toast from 'react-hot-toast';
-import { useGlobalContext } from '../provider/GlobalProvider';
-import AddToCartButton from './AddToCartButton';
-import { BsDownload } from 'react-icons/bs';
 
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { BsDownload } from 'react-icons/bs';
+import toast from 'react-hot-toast';
+
+import { valideURLConvert } from '../utils/valideURLConvert';
+import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees';
+import { pricewithDiscount } from '../utils/PriceWithDiscount';
+import AddToCartButton from './AddToCartButton';
+import { useGlobalContext } from '../provider/GlobalProvider';
+import '../componentcss/CardProduct.css';
 
 const CardProduct = ({ data }) => {
-  const url = `/product/${valideURLConvert(data.name)}-${data._id}`;
+  const user = useSelector(state => state.user);
   const { fetchCartItem } = useGlobalContext();
-    const [downloading, setDownloading] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
-    const handleDownload = async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-    
-      try {
-        setDownloading(true); 
-    
-        const zipFileUrl = data?.zipFile;
-        if (!zipFileUrl) {
-          toast.error('Download link not available');
-          setDownloading(false);
-          return;
-        }
-    
-        const response = await fetch(zipFileUrl);
-        const blob = await response.blob();
-        const link = document.createElement('a');
-    
-        link.href = window.URL.createObjectURL(blob);
-        link.download = `${data.name}.zip`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    
-        toast.success('Download started');
-    
-        
-        setTimeout(() => {
-          setDownloading(false);
-        }, 1000);
-      } catch (error) {
-        console.error('Download error:', error);
-        toast.error('Failed to download file');
+  const url = `/product/${valideURLConvert(data.name)}-${data._id}`;
+
+  const handleDownload = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    try {
+      setDownloading(true);
+      const zipFileUrl = data?.zipFile;
+
+      if (!zipFileUrl) {
+        toast.error('Download link not available');
         setDownloading(false);
+        return;
       }
+
+      const response = await fetch(zipFileUrl);
+      const blob = await response.blob();
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `${data.name}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      toast.success('Download started');
+    } catch (error) {
+      console.error('Download error:', error);
+      toast.error('Failed to download file');
+    } finally {
+      setDownloading(false);
     }
+  };
 
   return (
-    <Link
-      to={url}
-      className="border py-2 lg:py-3 px-2 lg:px-4 grid gap-2 lg:gap-3 min-w-36 lg:min-w-52 rounded-lg shadow bg-white hover:shadow-lg transition duration-300"
-    >
-      {/* Product Image */}
-      <div className="min-h-24 w-full max-h-28 lg:max-h-32 rounded overflow-hidden bg-gray-100 flex items-center justify-center">
+    <Link to={url} className="CardProduct">
+      {/* Image with hover label */}
+      <div className="CardProduct-image-container">
         <img
           src={data.image[0]}
           alt={data.name}
-          className="w-full h-full object-contain"
+          className="CardProduct-image"
         />
+        <div className="CardProduct-hover-label">3D View</div>
       </div>
 
-      {/* Product Details */}
-      <div className="space-y-1">
-        {/* Discount Badge */}
-        {Boolean(data.discount) && (
-          <div className="text-green-600 bg-green-100 px-2 py-0.5 w-fit text-xs rounded-full">
-            {data.discount}% discount
-          </div>
-        )}
-
-        {/* Product Name */}
-        <div className="font-medium text-sm lg:text-base text-gray-800 line-clamp-2">
-          {data.name}
+      {/* Details */}
+      <div className="CardProduct-details">
+        <div className="CardProduct-text">
+          <div className="CardProduct-name">{data.name}</div>
+          <div className="CardProduct-extension">{data.extension}</div>
         </div>
 
-        {/* Extension */}
-        <div className="text-gray-500 text-xs lg:text-sm">{data.extension}</div>
-
-        {/* Price */}
-<div className="text-sm lg:text-base font-semibold text-gray-900">
-  {data.price === 0
-    ? 'FREE'
-    : DisplayPriceInRupees(pricewithDiscount(data.price, data.discount))}
-</div>
-
-
-        {/* Conditional Button */}
-        {data.price === 0 ? (
-  <button
-  onClick={handleDownload}
-  disabled={downloading}
-  className={`my-7 flex items-center justify-center px-4 py-2 rounded-md text-base transition ${
-    downloading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white'
-  }`}
->
-  {
-    downloading ? (
-      <>
-        <svg className="animate-spin mr-2 h-5 w-5 text-white" viewBox="0 0 24 24">
-          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-        </svg>
-        Downloading...
-      </>
-    ) : (
-      <>
-        <BsDownload size={20} className="mr-2" />
-        Download
-      </>
-    )
-  }
-</button>
-
-) : (
-  <AddToCartButton data={data} />
-)}
-
+        <div className="CardProduct-footer">
+          <div className="CardProduct-price">
+            {data.price === 0
+              ? 'FREE'
+              : DisplayPriceInRupees(pricewithDiscount(data.price, data.discount))}
+          </div>
+          <div className="CardProduct-action">
+            {data.price === 0 ? (
+              <button
+                onClick={handleDownload}
+                disabled={downloading}
+                className={`CardProduct-download-btn ${downloading ? 'CardProduct-downloading' : ''}`}
+              >
+                {downloading ? (
+                  <div className="CardProduct-download-spinner"></div>
+                ) : (
+                  <BsDownload size={24} />
+                )}
+              </button>
+            ) : (
+              <AddToCartButton data={data} />
+            )}
+          </div>
+        </div>
       </div>
     </Link>
   );
 };
 
 export default CardProduct;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
+// import { BsDownload } from 'react-icons/bs';
+// import toast from 'react-hot-toast';
+
+// import { valideURLConvert } from '../utils/valideURLConvert';
+// import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees';
+// import { pricewithDiscount } from '../utils/PriceWithDiscount';
+// import AddToCartButton from './AddToCartButton';
+// import { useGlobalContext } from '../provider/GlobalProvider';
+
+// const CardProduct = ({ data }) => {
+//   const user = useSelector(state => state.user);
+//   const { fetchCartItem } = useGlobalContext();
+//   const [downloading, setDownloading] = useState(false);
+
+//   const url = `/product/${valideURLConvert(data.name)}-${data._id}`;
+
+//   const handleDownload = async (e) => {
+//     e.preventDefault();
+//     e.stopPropagation();
+
+//     try {
+//       setDownloading(true);
+//       const zipFileUrl = data?.zipFile;
+
+//       if (!zipFileUrl) {
+//         toast.error('Download link not available');
+//         setDownloading(false);
+//         return;
+//       }
+
+//       const response = await fetch(zipFileUrl);
+//       const blob = await response.blob();
+//       const link = document.createElement('a');
+//       link.href = window.URL.createObjectURL(blob);
+//       link.download = `${data.name}.zip`;
+//       document.body.appendChild(link);
+//       link.click();
+//       document.body.removeChild(link);
+
+//       toast.success('Download started');
+//     } catch (error) {
+//       console.error('Download error:', error);
+//       toast.error('Failed to download file');
+//     } finally {
+//       setDownloading(false);
+//     }
+//   };
+
+//   return (
+//     <Link
+//       to={url}
+//       className="w-[340px] h-[290px] flex-shrink-0 bg-[#1c1c1c] border border-[#333] rounded-xl shadow-lg hover:shadow-md transition duration-300 flex flex-col overflow-hidden"
+//     >
+      
+//      {/* Image with hover button label */}
+// <div className="h-[180px] w-full relative group overflow-hidden">
+//   <img
+//     src={data.image[0]}
+//     alt={data.name}
+//     className="w-full h-full object-cover transition duration-300"
+//   />
+
+//   {/* 3D View label on hover */}
+//   <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+//     <div className="bg-black bg-opacity-100 text-white text-xs px-3 py-1 rounded-md shadow">
+//       3D View
+//     </div>
+//   </div>
+// </div>
+
+
+     
+// {/* Details */}
+// <div className="px-2 py-1 flex flex-col justify-between flex-grow min-h-[80px]">
+//   <div className="mb-1">
+//     <div className="text-[13px] font-semibold text-white truncate">{data.name}</div>
+//     <div className="text-[11px] font-semibold text-gray-400">{data.extension} {/* by {user.name} */}</div>
+//     {/* <div class="text-[11px] font-semibold text-gray-400">by {user.name}</div> */}
+    
+//   </div>
+
+//   <div className="flex items-center">
+//     <div className="text-sm font-semibold text-white">
+//       {data.price === 0
+//         ? 'FREE'
+//         : DisplayPriceInRupees(pricewithDiscount(data.price, data.discount))}
+//     </div>
+//     <div className="ml-auto">
+//       {data.price === 0 ? (
+//         <button
+//           onClick={handleDownload}
+//           disabled={downloading}
+//           className={`flex items-center justify-center w-10 h-10 rounded-full transition ${
+//             downloading
+//               ? 'bg-black cursor-not-allowed'
+//               : 'bg-neutral-800 hover:bg-black text-white'
+//           }`}
+//         >
+//           {downloading ? (
+//             <svg
+//               className="animate-spin h-9 w-9 text-white"
+//               viewBox="0 0 24 24"
+//               fill="black"
+//             >
+//               <circle
+//                 className="opacity-100"
+//                 cx="12"
+//                 cy="12"
+//                 r="10"
+//                 stroke="currentColor"
+//                 strokeWidth="1"
+//               />
+//               <path
+//                 className="opacity-100"
+//                 fill="currentColor"
+//                 d="M4 12a8 8 0 018-8v8z"
+//               />
+//             </svg>
+//           ) : (
+//             <BsDownload size={24} />
+//           )}
+//         </button>
+//       ) : (
+//         <AddToCartButton data={data} />
+//       )}
+//     </div>
+//   </div>
+// </div>
+
+
+//     </Link>
+//   );
+// };
+
+// export default CardProduct;
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
+// import { BsDownload } from 'react-icons/bs';
+// import toast from 'react-hot-toast';
+
+// import { valideURLConvert } from '../utils/valideURLConvert';
+// import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees';
+// import { pricewithDiscount } from '../utils/PriceWithDiscount';
+// import AddToCartButton from './AddToCartButton';
+// import { useGlobalContext } from '../provider/GlobalProvider';
+
+// const CardProduct = ({ data }) => {
+//   const user = useSelector(state => state.user);
+//   const { fetchCartItem } = useGlobalContext();
+//   const [downloading, setDownloading] = useState(false);
+
+//   const url = `/product/${valideURLConvert(data.name)}-${data._id}`;
+
+//   const handleDownload = async (e) => {
+//     e.preventDefault();
+//     e.stopPropagation();
+
+//     try {
+//       setDownloading(true);
+//       const zipFileUrl = data?.zipFile;
+
+//       if (!zipFileUrl) {
+//         toast.error('Download link not available');
+//         setDownloading(false);
+//         return;
+//       }
+
+//       const response = await fetch(zipFileUrl);
+//       const blob = await response.blob();
+//       const link = document.createElement('a');
+//       link.href = window.URL.createObjectURL(blob);
+//       link.download = `${data.name}.zip`;
+//       document.body.appendChild(link);
+//       link.click();
+//       document.body.removeChild(link);
+
+//       toast.success('Download started');
+//     } catch (error) {
+//       console.error('Download error:', error);
+//       toast.error('Failed to download file');
+//     } finally {
+//       setDownloading(false);
+//     }
+//   };
+
+//   return (
+//     <Link
+//       to={url}
+//       className="w-[340px] h-[290px] flex-shrink-0 bg-[#ffffff] border  rounded-xl shadow-lg hover:shadow-md transition duration-300 flex flex-col overflow-hidden"
+//     >
+      
+//      {/* Image with hover button label */}
+// <div className="h-[180px] w-full relative group overflow-hidden">
+//   <img
+//     src={data.image[0]}
+//     alt={data.name}
+//     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+//   />
+  
+//   {/* Button-like label on hover */}
+//   <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+//     <div className="bg-black bg-opacity-100 text-white text-xs px-3 py-1 rounded-md shadow">
+//       3D View
+//     </div>
+//   </div>
+// </div>
+
+
+     
+// {/* Details */}
+// <div className="px-3 py-2 flex flex-col flex-grow justify-between">
+//   <div className="mb-1">
+//     <div className="text-[15px] font-semibold text-black truncate">{data.name}</div>
+//     <div className="text-[11px] font-semibold text-gray-700">{data.extension} {/* by {user.name} */}</div>
+//     <div class="text-[11px] font-semibold text-gray-900">by {user.name}</div>
+    
+//   </div>
+
+//   <div className="flex items-center">
+//     <div className="text-sm font-semibold text-white">
+//       {data.price === 0
+//         ? 'FREE'
+//         : DisplayPriceInRupees(pricewithDiscount(data.price, data.discount))}
+//     </div>
+//     <div className="ml-auto">
+//       {data.price === 0 ? (
+//         <button
+//           onClick={handleDownload}
+//           disabled={downloading}
+//           className={`flex items-center justify-center w-10 h-10 rounded-full transition ${
+//             downloading
+//               ? 'bg-black cursor-not-allowed'
+//               : 'bg-neutral-800 hover:bg-black text-white'
+//           }`}
+//         >
+//           {downloading ? (
+//             <svg
+//               className="animate-spin h-9 w-9 text-white"
+//               viewBox="0 0 24 24"
+//               fill="black"
+//             >
+//               <circle
+//                 className="opacity-100"
+//                 cx="12"
+//                 cy="12"
+//                 r="10"
+//                 stroke="currentColor"
+//                 strokeWidth="1"
+//               />
+//               <path
+//                 className="opacity-100"
+//                 fill="currentColor"
+//                 d="M4 12a8 8 0 018-8v8z"
+//               />
+//             </svg>
+//           ) : (
+//             <BsDownload size={24} />
+//           )}
+//         </button>
+//       ) : (
+//         <AddToCartButton data={data} />
+//       )}
+//     </div>
+//   </div>
+// </div>
+
+
+//     </Link>
+//   );
+// };
+
+// export default CardProduct;

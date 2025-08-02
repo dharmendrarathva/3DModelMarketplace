@@ -1,0 +1,128 @@
+/* AddFieldComponent.css */
+.add-field {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(6px);
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.add-field__container {
+  background-color: #0f172a;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 30rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: add-field-fade-in 0.3s ease-out forwards;
+}
+
+@keyframes add-field-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.add-field__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.add-field__title {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.add-field__close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  transition: color 0.2s;
+}
+
+.add-field__close-btn:hover {
+  color: #f43f5e;
+}
+
+.add-field__input {
+  background-color: #1e293b;
+  color: #f1f5f9;
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid #334155;
+  border-radius: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.add-field__input:focus {
+  border-color: #ffffff;
+}
+
+.add-field__error-message {
+  color: #f87171;
+  font-size: 0.875rem;
+  margin-top: -0.5rem;
+}
+
+.add-field__submit-btn {
+  background: linear-gradient(to right, #0ea5e9, #2563eb);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  display: block;
+  margin: 1rem auto 0 auto;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.add-field__submit-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+.add-field__submit-btn:active {
+  transform: scale(0.98);
+}
+
+.add-field__suggestions {
+  margin-top: 1.5rem;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+.add-field__suggestions-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.add-field__suggestions-list {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+}
+
+.add-field__suggestion-item {
+  margin-bottom: 0.25rem;
+  color: #94a3b8;
+}

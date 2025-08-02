@@ -17,6 +17,7 @@ import GlobalProvider, { useGlobalContext } from './provider/GlobalProvider';
 import CartMobileLink from './components/CartMobile';
 
 
+
 function App() {
   
   const dispatch = useDispatch()
@@ -114,4 +115,4 @@ useEffect(()=>{
   ) 
 }
 
-export default App  
+export default App    

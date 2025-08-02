@@ -1,23 +1,25 @@
-import React from 'react'
+import React from 'react';
 import { IoClose } from "react-icons/io5";
+import "../componentcss/CofirmBox.css";
 
-const CofirmBox = ({cancel,confirm,close}) => {
+const ConfirmBox = ({ cancel, confirm, close }) => {
   return (
-    <div className='fixed top-0 bottom-0 right-0 left-0 z-50 bg-neutral-800 bg-opacity-70 p-4 flex justify-center items-center'>
-      <div className='bg-white w-full max-w-md p-4 rounded'>
-           <div className='flex justify-between items-center gap-3'>
-                <h1 className='font-semibold'>Permanent Delete</h1>
-                <button onClick={close}>
-                    <IoClose size={25} />
-                </button>
-           </div>
-           <p className='my-4'>Are you sure permanent delete ?</p>
-           <div className='w-fit ml-auto flex items-center gap-3'>
-                <button onClick={cancel} className='px-4 py-1 border rounded border-red-500 text-red-500 hover:bg-red-500 hover:text-white'>Cancel</button>
-                <button onClick={confirm} className='px-4 py-1 border rounded border-green-600 text-green-600 hover:bg-green-600 hover:text-white'>Confirm</button>
-           </div>
+    <div className="confirm-box-overlay">
+      <div className="confirm-box-container">
+        <div className="confirm-box-header">
+          <h1 className="confirm-box-title">Permanent Delete</h1>
+          <button onClick={close} className="confirm-box-close-btn">
+            <IoClose size={25} />
+          </button>
+        </div>
+        <p className="confirm-box-message">Are you sure permanent delete?</p>
+        <div className="confirm-box-buttons">
+          <button onClick={cancel} className="confirm-box-btn Boxcancel-btn">Cancel</button>
+          <button onClick={confirm} className="confirm-box-btn Boxconfirm-btn">Confirm</button>
+        </div>
       </div>
     </div>
-  )
-}
-export default CofirmBox
+  );
+};
+
+export default ConfirmBox;

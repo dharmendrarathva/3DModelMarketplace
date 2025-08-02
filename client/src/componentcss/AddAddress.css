@@ -1,0 +1,123 @@
+.AddAddress-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.AddAddress-container {
+    background-color: #1a1a1a;
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 28rem;
+    margin: 0 1rem;
+    overflow: hidden;
+    border: 1px solid #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.AddAddress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #333;
+}
+
+.AddAddress-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #f3f4f6;
+}
+
+.AddAddress-closeButton {
+    color: #9ca3af;
+    transition: all 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+}
+
+.AddAddress-closeButton:hover {
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.AddAddress-form {
+    padding: 1.5rem;
+}
+
+.AddAddress-formGroup {
+    margin-bottom: 1rem;
+}
+
+.AddAddress-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #d1d5db;
+    margin-bottom: 0.25rem;
+}
+
+.AddAddress-input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    border: 1px solid #333;
+    background-color: #2d2d2d;
+    color: #f3f4f6;
+    transition: all 0.2s;
+}
+
+.AddAddress-input:focus {
+    outline: none;
+    border-color: #eaebed;
+    background-color: #333;
+}
+
+.AddAddress-inputError {
+    border-color: #ef4444;
+}
+
+.AddAddress-errorMessage {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: #ef4444;
+}
+
+.AddAddress-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .AddAddress-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.AddAddress-submitButton {
+    width: 100%;
+    background-color: #2563eb;
+    color: white;
+    font-weight: 500;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 1rem;
+}
+
+.AddAddress-submitButton:hover {
+    background-color: #1d4ed8;
+}

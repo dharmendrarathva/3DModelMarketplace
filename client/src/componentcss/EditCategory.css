@@ -1,0 +1,175 @@
+/* Modal Overlay */
+.EditCategory-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background-color: rgba(17, 24, 39, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    backdrop-filter: blur(6px);
+}
+
+/* Modal Container */
+.EditCategory-container {
+    background-color: #1f2937;
+    color: #f9fafb;
+    max-width: 40rem;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Modal Header */
+.EditCategory-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.EditCategory-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #f3f4f6;
+}
+
+.EditCategory-close-btn {
+    background: transparent;
+    border: none;
+    color: #9ca3af;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.EditCategory-close-btn:hover {
+    color: #f87171;
+}
+
+/* Form Layout */
+.EditCategory-form {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Form Group */
+.EditCategory-formGroup {
+    display: grid;
+    gap: 0.5rem;
+}
+
+/* Inputs */
+.EditCategory-formInput {
+    background-color: #374151;
+    color: #f9fafb;
+    padding: 0.75rem 1rem;
+    border: 1px solid #4b5563;
+    border-radius: 0.5rem;
+    outline: none;
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+
+.EditCategory-formInput:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
+}
+
+/* Upload Section */
+.EditCategory-imageUploadContainer {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+    .EditCategory-imageUploadContainer {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.EditCategory-imagePreview {
+    border: 1px dashed #4b5563;
+    background-color: #111827;
+    height: 9rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+    .EditCategory-imagePreview {
+        width: 9rem;
+    }
+}
+
+.EditCategory-previewImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.EditCategory-noImageText {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    text-align: center;
+}
+
+/* Upload Button */
+.EditCategory-uploadBtn {
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: #f9fafb;
+    background-color: #2563eb;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.EditCategory-uploadBtn:hover:not(.EditCategory-disabled) {
+    background-color: #1d4ed8;
+}
+
+.EditCategory-uploadBtn.EditCategory-disabled {
+    background-color: #6b7280;
+    cursor: not-allowed;
+}
+
+/* Hidden Input */
+.EditCategory-hiddenInput {
+    display: none;
+}
+
+/* Submit Button */
+.EditCategory-submitBtn {
+    padding: 0.75rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s, transform 0.2s;
+    background-color: #10b981;
+    color: #ffffff;
+    border: none;
+}
+
+.EditCategory-submitBtn.EditCategory-active:hover {
+    background-color: #059669;
+    transform: translateY(-1px);
+}
+
+.EditCategory-submitBtn.EditCategory-disabled {
+    background-color: #6b7280;
+    cursor: not-allowed;
+}

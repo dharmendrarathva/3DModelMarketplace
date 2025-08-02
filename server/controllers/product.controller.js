@@ -56,6 +56,180 @@ export const createProductController = async (request, response) => {
     }
 };
 
+export const getAvailableProducts = async (req, res) => {
+  try {
+    const count = parseInt(req.query.count) || 10; // Number of items per page
+    const page = parseInt(req.query.page) || 1;     // Current page number
+    const skip = (page - 1) * count;                // Calculate items to skip
+
+    const products = await ProductModel.find({
+      publish: true,
+      zipFile: { $exists: true, $ne: '' }
+    })
+      .skip(skip)
+      .limit(count)
+      .sort({ createdAt: -1 }); // Optional: latest first
+
+    return res.json({
+      message: "Available product list",
+      data: products,
+      error: false,
+      success: true
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || error,
+      error: true,
+      success: false
+    });
+  }
+};
+
+export const getProductViews = async (req, res) => {
+  try {
+    const { productId } = req.params;
+
+    if (!productId) {
+      return res.status(400).json({
+        message: "Product ID is required",
+        error: true,
+        success: false
+      });
+    }
+
+    const product = await ProductModel.findById(productId).select("views");
+
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found",
+        error: true,
+        success: false
+      });
+    }
+
+    return res.status(200).json({
+      message: "Product view count fetched successfully",
+      views: product.views,
+      error: false,
+      success: true
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Server error",
+      error: true,
+      success: false
+    });
+  }
+};
+
+
+export const getSimilarProducts = async (req, res) => {
+  try {
+    const { productId } = req.body;
+
+    if (!productId) {
+      return res.status(400).json({
+        message: "Product ID is required",
+        error: true,
+        success: false
+      });
+    }
+
+    const currentProduct = await ProductModel.findById(productId);
+
+    if (!currentProduct) {
+      return res.status(404).json({
+        message: "Product not found",
+        error: true,
+        success: false
+      });
+    }
+
+    const similarProducts = await ProductModel.find({
+      _id: { $ne: productId }, // Exclude current product
+      category: { $in: currentProduct.category }, // Match category
+      publish: true,
+      zipFile: { $exists: true, $ne: "" }
+    }).limit(10);
+
+    return res.json({
+      message: "Similar category products",
+      data: similarProducts,
+      error: false,
+      success: true
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Server error",
+      error: true,
+      success: false
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const getLatestProducts = async (req, res) => {
+  try {
+    const latestProducts = await ProductModel.find({ publish: true })
+      .sort({ createdAt: -1 }) // Sort by newest first
+      .limit(15);              // Limit to 15
+
+    return res.json({
+      message: "Latest 15 products",
+      data: latestProducts,
+      success: true,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Server error",
+      success: false,
+      error: true,
+    });
+  }
+};
+
+// get random products
+export const getRandomProducts = async (request, response) => {
+    try {
+        let { count } = request.query;
+
+        // Default count if not provided
+        count = parseInt(count) || 10;
+
+        const randomProducts = await ProductModel.aggregate([
+            { $sample: { size: count } }
+        ]);
+
+        return response.json({
+            message: "Random product list",
+            data: randomProducts,
+            error: false,
+            success: true
+        });
+
+    } catch (error) {
+        return response.status(500).json({
+            message: error.message || error,
+            error: true,
+            success: false
+        });
+    }
+};
 
 export const getProductController = async(request,response)=>{
     try {

@@ -1,0 +1,77 @@
+.latest-products {
+  width: 100%;
+  margin-bottom: 4.5rem;
+    margin-top: 2.5rem;
+
+}
+
+.latest-products__container {
+  max-width: 1455px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.latest-products__title {
+  margin-bottom: 1.25rem;
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #26a9e0;
+  letter-spacing: 0.5px;
+}
+
+.latest-products__scroll-btn {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.latest-products__scroll-btn:hover {
+  color: #2563eb;
+}
+
+.latest-products__scroll-btn--left {
+  left: -1.5rem;
+}
+
+.latest-products__scroll-btn--right {
+  right: -1.5rem;
+}
+
+.latest-products__scroll-icon {
+  font-size: 1.75rem;
+}
+
+.latest-products__scroll-container {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  pointer-events: none;
+}
+
+.latest-products__scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Medium screens and up */
+@media (min-width: 1024px) {
+  .latest-products__scroll-btn {
+    display: flex;
+  }
+  
+  .latest-products__scroll-container {
+    gap: 1.25rem;
+    pointer-events: auto;
+  }
+  
+  .latest-products__scroll-icon {
+    font-size: 2rem;
+  }
+}

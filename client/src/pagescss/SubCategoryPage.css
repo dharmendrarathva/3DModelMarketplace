@@ -1,0 +1,193 @@
+.SubCategoryPage-page {
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: #020617;
+  color: #f8fafc;
+}
+
+.SubCategoryPage-header {
+  background-color: #000000;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.75rem;
+  margin-bottom: 2rem;
+  border: 0.5px solid #938a8a;
+}
+
+.SubCategoryPage-header h2 {
+ font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  background: linear-gradient(90deg, #f9fafc, #938a8a);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.SubCategoryPage-add-sub-category-btn {
+ display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #6e6d6d, #2c2c2d);
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid #afa6a6; /* Subtle border */
+ 
+  position: relative;
+  overflow: hidden; /* For hover effects */
+}
+
+.SubCategoryPage-add-sub-category-btn:hover {
+  background: #5e5d5d;
+  transform: translateY(-1px);
+}
+
+
+
+.SubCategoryPage-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.SubCategoryPage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.SubCategoryPage-card {
+  background-color: #1e293b;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.SubCategoryPage-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-color: rgba(95, 94, 97, 0.5);
+}
+
+.SubCategoryPage-image-container {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+}
+
+.SubCategoryPage-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.SubCategoryPage-content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.SubCategoryPage-name {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  color: #f8fafc;
+  text-align: center;
+}
+
+.SubCategoryPage-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.SubCategoryPage-edit-btn, 
+.SubCategoryPage-delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.SubCategoryPage-edit-btn {
+  background-color: #626463;
+  color: white;
+}
+
+.SubCategoryPage-edit-btn:hover {
+  background-color: #747a78;
+  transform: translateY(-2px);
+}
+
+.SubCategoryPage-delete-btn {
+  background-color: #626463;
+  color: white;
+}
+
+.SubCategoryPage-delete-btn:hover {
+  background-color: #747a78;
+  transform: translateY(-2px);
+}
+
+.SubCategoryPage-action-icon {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .SubCategoryPage-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .SubCategoryPage-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .SubCategoryPage-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+.EditSubCategory-arrowIcon {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@media (max-width: 480px) {
+  .SubCategoryPage-page {
+    padding: 1rem;
+  }
+  
+  .SubCategoryPage-actions {
+    flex-direction: column;
+  }
+  
+  .SubCategoryPage-edit-btn, 
+  .SubCategoryPage-delete-btn {
+    width: 100%;
+  }
+}

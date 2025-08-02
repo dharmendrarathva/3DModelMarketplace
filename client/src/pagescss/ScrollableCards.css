@@ -1,0 +1,94 @@
+.scrollable-cards-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scrollable-cards-wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  max-width: 664px;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar */
+.scrollable-cards-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.software-card {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 12px;
+  height: 64px;
+  width: 160px;
+  border: 1px solid #333;
+}
+
+.card-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70%; /* Target height */
+  background: linear-gradient(to top, #2a2a2a, #3a3a3a, #2a2a2a);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  z-index: 0;
+  border-radius: 1px;
+  animation: smoothGradientFill 1.2s ease-out forwards;
+}
+
+
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  z-index: 20;
+  height: 100%;
+}
+
+.card-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.card-name {
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.card-chevron {
+  color: #9CA3AF;
+  width: 24px;
+  height: 24px;
+}
+
+.scroll-button {
+  color: #9CA3AF;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.scroll-button:hover {
+  color: white;
+}
+
+@keyframes smoothGradientFill {
+  from {
+    transform: scaleY(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}

@@ -6,6 +6,7 @@ import SummaryApi from '../common/SummaryApi'
 import AxiosToastError from '../utils/AxiosToastError'
 import { updatedAvatar } from '../store/userSlice'
 import { IoClose } from "react-icons/io5";
+import '../componentcss/UserProfileAvatarEdit.css'
 
 const UserProfileAvatarEdit = ({ close }) => {
     const user = useSelector(state => state.user)
@@ -55,25 +56,23 @@ const UserProfileAvatarEdit = ({ close }) => {
     }
 
     return (
-        <section className='fixed top-0 bottom-0 left-0 right-0 bg-neutral-900 bg-opacity-60 p-4 flex items-center justify-center'>
-            <div className='bg-white max-w-sm w-full rounded p-4 flex flex-col items-center justify-center'>
-                <button onClick={close} className='text-neutral-800 w-fit block ml-auto'>
+        <section className='user-profile-avatar-edit-modal'>
+            <div className='user-profile-avatar-edit-container'>
+                <button onClick={close} className='user-profile-avatar-edit-close-btn'>
                     <IoClose size={20} />
                 </button>
 
                 {/* Profile Image Preview */}
-                <div className='w-20 h-20 bg-red-500 flex items-center justify-center rounded-full overflow-hidden drop-shadow-sm'>
+                <div className='user-profile-avatar-preview'>
                     {previewImage ? (
                         <img 
                             alt="Preview"
                             src={previewImage}
-                            className='w-full h-full object-cover'
                         />
                     ) : user.avatar ? (
                         <img 
                             alt={user.name}
                             src={user.avatar}
-                            className='w-full h-full object-cover'
                         />
                     ) : (
                         <FaRegUserCircle size={65} />
@@ -81,18 +80,21 @@ const UserProfileAvatarEdit = ({ close }) => {
                 </div>
 
                 {/* File Upload */}
-                <label htmlFor='uploadProfile'>
-                    <div className='border border-primary-200 cursor-pointer hover:bg-primary-200 px-4 py-1 rounded text-sm my-3'>
-                        {loading ? "Loading..." : imageSelected ? "Choose Another" : "Upload"}
-                    </div>
-                    <input onChange={handleUploadAvatarImage} type='file' id='uploadProfile' className='hidden' />
+                <label htmlFor='uploadProfile' className='user-profile-upload-label'>
+                    {loading ? "Loading..." : imageSelected ? "Choose Another" : "Upload"}
+                    <input 
+                        onChange={handleUploadAvatarImage} 
+                        type='file' 
+                        id='uploadProfile' 
+                        className='user-profile-upload-input' 
+                    />
                 </label>
 
                 {/* Set as Profile Button */}
                 {imageSelected && (
                     <button
                         onClick={handleSetProfile}
-                        className='bg-green-500 text-white px-4 py-1 rounded text-sm my-2 hover:bg-green-600'
+                        className='user-profile-submit-btn'
                         disabled={loading}
                     >
                         {loading ? "Updating..." : "Set as Profile"}
@@ -101,7 +103,7 @@ const UserProfileAvatarEdit = ({ close }) => {
 
                 {/* Success Message */}
                 {successMessage && (
-                    <p className="text-green-500 text-sm mt-2">{successMessage}</p>
+                    <p className="user-profile-success-message">{successMessage}</p>
                 )}
             </div>
         </section>

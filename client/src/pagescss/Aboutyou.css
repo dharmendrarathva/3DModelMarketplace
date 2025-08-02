@@ -1,0 +1,129 @@
+/* componentcss/Aboutyou.css */
+.about-you-container {
+    min-height: 80vh;
+    background-color: rgb(243 244 246);
+    padding: 2.5rem 1rem;
+}
+
+.about-you-content {
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.about-you-title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    text-align: center;
+    color: rgb(0 0 0);
+    margin-bottom: 1.5rem;
+}
+
+.about-you-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+    color: rgb(0 0 0);
+    margin-bottom: 1.5rem;
+}
+
+.about-you-form {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .about-you-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.about-you-full-width {
+    grid-column: span 2 / span 2;
+}
+
+.about-you-label {
+    display: block;
+    color: rgb(0 0 0);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.about-you-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.about-you-radio-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.about-you-radio-input {
+    color: rgb(37 99 235);
+}
+
+.about-you-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .about-you-checkbox-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.about-you-checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.about-you-checkbox-input {
+    color: rgb(37 99 235);
+}
+
+.about-you-textarea {
+    width: 100;
+    padding: 0.5rem 1rem;
+    border-width: 1px;
+    border-radius: 0.375rem;
+    resize: none;
+}
+
+.about-you-textarea:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+    --tw-ring-color: rgb(59 130 246);
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
+}
+
+.about-you-submit-btn {
+    width: 100%;
+    background-color: rgb(37 99 235);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.about-you-submit-btn:hover {
+    background-color: rgb(29 78 216);
+}

@@ -70,38 +70,7 @@ export async function registerUserController(request,response){
 }
 
 
-//verifyenmail controller
-export async function verifyEmailController(request,response){
-    try {
-        const { code } = request.body
 
-        const user = await UserModel.findOne({ _id : code})
-
-        if(!user){
-            return response.status(400).json({
-                message : "Invalid code",
-                error : true,
-                success : false
-            })
-        }
-
-        const updateUser = await UserModel.updateOne({ _id : code },{
-            verify_email : true
-        })
-
-        return response.json({
-            message : "Verify email done",
-            success : true,
-            error : false
-        })
-    } catch (error) {
-        return response.status(500).json({
-            message : error.message || error,
-            error : true,
-            success : true
-        })
-    }
-}
 //login controller
 export async function loginController(request,response){
     try {
@@ -239,41 +208,147 @@ export async  function uploadAvatar(request,response){
     }
 }
 //update user details
-export async function updateUserDetails(request,response){
+// export async function updateUserDetails(request,response){
+//     try {
+//         const userId = request.userId //auth middleware
+//         const { name, email, mobile, password } = request.body 
+
+//         let hashPassword = ""
+
+//         if(password){
+//             const salt = await bcryptjs.genSalt(10)
+//             hashPassword = await bcryptjs.hash(password,salt)
+//         }
+
+//         const updateUser = await UserModel.updateOne({ _id : userId},{
+//             ...(name && { name : name }),
+//             ...(email && { email : email }),
+//             ...(mobile && { mobile : mobile }),
+//             ...(password && { password : hashPassword })
+//         })
+
+//         return response.json({
+//             message : "Updated successfully",
+//             error : false,
+//             success : true,
+//             data : updateUser
+//         })
+
+
+//     } catch (error) {
+//         return response.status(500).json({
+//             message : error.message || error,
+//             error : true,
+//             success : false
+//         })
+//     }
+// }
+
+
+export async function updateUserDetails(req, res) {
+  try {
+    const userId = req.userId;
+    const { name, mobile, password } = req.body;
+
+    const updateFields = {};
+
+    // Name
+    if (name) updateFields.name = name.trim();
+
+    // Mobile (optional formatting)
+    if (mobile) {
+      const digitsOnly = mobile.replace(/\D/g, ''); // remove non-digit characters
+      if (digitsOnly.length < 6 || digitsOnly.length > 15) {
+        return res.status(400).json({
+          message: "Invalid mobile number format.",
+          error: true,
+          success: false,
+        });
+      }
+      updateFields.mobile = `+${digitsOnly}`;
+    }
+
+    // Password (if provided)
+    if (password) {
+      const salt = await bcryptjs.genSalt(10);
+      updateFields.password = await bcryptjs.hash(password, salt);
+    }
+
+    // Update user
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userId,
+      { $set: updateFields },
+      { new: true, runValidators: true }
+    ).select('-password'); // exclude password from response
+
+    return res.status(200).json({
+      message: "Profile updated successfully.",
+      error: false,
+      success: true,
+      data: updatedUser,
+    });
+
+  } catch (error) {
+    if (error.code === 11000) {
+      return res.status(400).json({
+        message: "Duplicate entry for email or mobile.",
+        error: true,
+        success: false,
+      });
+    }
+
+    console.error("Update user error:", error);
+    return res.status(500).json({
+      message: error.message || "Something went wrong.",
+      error: true,
+      success: false,
+    });
+  }
+}
+//verifyenmail controller
+export async function verifyEmailController(request,response){
     try {
-        const userId = request.userId //auth middleware
-        const { name, email, mobile, password } = request.body 
+        const { code } = request.body
 
-        let hashPassword = ""
+        const user = await UserModel.findOne({ _id : code})
 
-        if(password){
-            const salt = await bcryptjs.genSalt(10)
-            hashPassword = await bcryptjs.hash(password,salt)
+        if(!user){
+            return response.status(400).json({
+                message : "Invalid code",
+                error : true,
+                success : false
+            })
         }
 
-        const updateUser = await UserModel.updateOne({ _id : userId},{
-            ...(name && { name : name }),
-            ...(email && { email : email }),
-            ...(mobile && { mobile : mobile }),
-            ...(password && { password : hashPassword })
+        const updateUser = await UserModel.updateOne({ _id : code },{
+            verify_email : true
         })
 
         return response.json({
-            message : "Updated successfully",
-            error : false,
+            message : "Verify email done",
             success : true,
-            data : updateUser
+            error : false
         })
-
-
     } catch (error) {
         return response.status(500).json({
             message : error.message || error,
             error : true,
-            success : false
+            success : true
         })
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 // export async function forgotPasswordController(request,response) {
 //     try {
 //         const { email } = request.body 

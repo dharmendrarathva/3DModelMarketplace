@@ -1,0 +1,92 @@
+/* Overlay */
+.confirm-box-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Box Container */
+.confirm-box-container {
+  background-color: #1f2937; /* Dark background */
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 400px;
+  color: white;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* Header */
+.confirm-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.confirm-box-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.confirm-box-close-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.confirm-box-close-btn:hover {
+  color: rgb(223, 109, 109);
+}
+
+/* Message */
+.confirm-box-message {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #d1d5db;
+  text-align: center;
+}
+
+/* Buttons */
+.confirm-box-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.confirm-box-btn {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  color: white;
+  cursor: pointer;
+}
+
+.Boxcancel-btn {
+  background-color: #6b7280; /* gray */
+}
+
+.Boxcancel-btn:hover {
+  background-color: #4b5563;
+}
+
+.Boxconfirm-btn {
+  background-color: #ef4444; /* red */
+}
+
+.Boxconfirm-btn:hover {
+  background-color: #b91c1c;
+}
