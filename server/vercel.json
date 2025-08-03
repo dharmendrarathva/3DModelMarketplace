@@ -1,0 +1,16 @@
+{
+    "version" : 2,
+    "name" : "3D Model Marketplace",
+    "builds" : [
+        {
+            "src" : "./index.js",
+            "use" : "@vercel/node"
+        }
+    ],
+    "routes" : [
+        {
+            "src" : "/(.*)",
+            "dest" : "/"
+        }
+    ]
+}     

@@ -130,7 +130,7 @@ const AvailableProductsDisplay = ({ count = 10 }) => {
           {data.map((p, index) => (
             <CardProduct data={p} key={`${p._id}-AvailableProduct-${index}`} />
           ))}
-          {loading && [...Array(count)].map((_, index) => (
+          {loading && [...Array(count)].map((_,index) => (
             <CardLoading key={`loading-${index}`} />
           ))}
         </div>
